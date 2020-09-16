@@ -3,6 +3,7 @@ const UPDATE_NUMBER_TEXTAREA = 'UPDATE-NUMBER-TEXT-AREA';
 
 let initialState = {
     NumberButtons: [
+        { name: '.' },
         { name: '0' },
         { name: '1' },
         { name: '2' },
@@ -14,24 +15,51 @@ let initialState = {
         { name: '8' },
         { name: '9' }
     ],
-    expression: ''
+    expression: '',
+    dot: false
 }
 
 
 const calculatorReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_NUMBER_TEXTAREA:
+            if (action.text === '.' && state.expression === '') {
+                state.expression += '0.';
+                state.dot = true;
+                return state;
+            }
             let newText;
             if (action.text.charAt(0) === '=') {
                 newText = action.text.slice(1);
             } else { newText = action.text }
-            if (isNaN(newText)) { return state; } else {
+            if (isNaN(newText) && newText.charAt(newText.length - 1) !== '.') { return state; } else {
+                if (newText.charAt(newText.length - 1) === '.') {
+                    if (state.dot === true) {
+                        return state;
+                    } else {
+                        state.dot = true;
+                    }
+                }
                 state.expression = newText;
                 return state;
             }
 
         case UPDATE_NUMBER:
-            state.expression += action.text;
+            if (action.text === '.') {
+                if (state.dot === true) {
+                    return state;
+                } else {
+                    state.dot = true;
+                }
+            }
+            if (action.text === '.' && state.expression === '') {
+                state.expression += '0.';
+                state.dot = true;
+            } else {
+
+                state.expression += action.text;
+            }
+
             return state;
         default: return state;
     }
