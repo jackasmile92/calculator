@@ -5,9 +5,10 @@ import CalculatorButtons from './CalculatorButtons/CalculatorButtons';
 const Calculator = (props) => {
   let input_text;
   let newExp = React.createRef();
+  let expression =props.state.calculatorData.wholeExpression + props.state.calculatorData.expression ;
 
-  if (props.state.calculatorData.expression === '') { input_text = '' }
-  else { input_text = '=' + props.state.calculatorData.expression; }
+  if (expression === '') { input_text = '' }
+  else { input_text = '=' + expression; }
 
   let onExpChange = () => {
     let text = newExp.current.value;

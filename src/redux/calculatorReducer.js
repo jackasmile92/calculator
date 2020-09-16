@@ -1,5 +1,6 @@
 const UPDATE_NUMBER = 'UPDATE-NUMBER';
 const UPDATE_NUMBER_TEXTAREA = 'UPDATE-NUMBER-TEXT-AREA';
+const CLEAR_TEXTAREA = 'CLEAR-TEXT-AREA';
 
 let initialState = {
     NumberButtons: [
@@ -15,7 +16,14 @@ let initialState = {
         { name: '8' },
         { name: '9' }
     ],
+    ActionButtons: [
+        { name: '+' },
+        { name: '-' },
+        { name: '*' },
+        { name: '/' }
+    ],
     expression: '',
+    wholeExpression:'',
     dot: false
 }
 
@@ -61,6 +69,12 @@ const calculatorReducer = (state = initialState, action) => {
             }
 
             return state;
+
+        case CLEAR_TEXTAREA:
+            state.dot = false;
+            state.expression = '';
+            state.wholeExpression = '';
+            return state;
         default: return state;
     }
 
@@ -71,5 +85,8 @@ export const updateExpressionCreater = (text) => (
 
 export const updateExpressionFromTextaresCreater = (text) => (
     { type: UPDATE_NUMBER_TEXTAREA, text: text });
+
+export const clearTextaresCreater = () => (
+    { type: CLEAR_TEXTAREA});
 
 export default calculatorReducer;

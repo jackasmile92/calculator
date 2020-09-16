@@ -1,15 +1,20 @@
 import React from 'react';
 import s from './Button.module.css';
-import { updateExpressionCreater } from '../../../redux/calculatorReducer';
+import { clearTextaresCreater, updateExpressionCreater } from '../../../redux/calculatorReducer';
 
 const Button = (props) => {
     let onButtonClick = () => {
-        props.dispatch(updateExpressionCreater(props.name) );
-      };
+        if (props.type === 'number') {
+            props.dispatch(updateExpressionCreater(props.name));
+        }
+        if (props.type === 'clear'){
+            props.dispatch(clearTextaresCreater());
+        }
+    };
 
     return (
         <div className={s.button_small}>
-           <button onClick={onButtonClick}>{props.name}</button>
+            <button onClick={onButtonClick}>{props.name}</button>
         </div>
     );
 }

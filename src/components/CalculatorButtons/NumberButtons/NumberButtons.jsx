@@ -4,7 +4,7 @@ import s from './NumberButtons.module.css';
 
 const NumberButtons = (props) => {
     let buttonNames = props.buttonsData.NumberButtons;
-    let buttonElements = buttonNames.map(b =>  <Button name ={b.name} dispatch = {props.dispatch}/> )
+    let buttonElements = buttonNames.map(b =>  <Button type ={'number'} name ={b.name} dispatch = {props.dispatch}/> )
 
     return (
         <div className ={s.number_buttons}>
