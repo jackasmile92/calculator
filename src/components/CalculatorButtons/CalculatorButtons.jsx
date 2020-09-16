@@ -6,7 +6,7 @@ const CalculatorButtons = (props) => {
     return (
         <div>
             <ActionButtons/>
-            <NumberButtons buttonsData={props.state.calculatorData}/>
+            <NumberButtons buttonsData={props.state.calculatorData} dispatch = {props.dispatch}/>
         </div>
     );
 }

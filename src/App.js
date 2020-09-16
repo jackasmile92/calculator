@@ -5,7 +5,7 @@ import Calculator from './components/Calculator';
 function App(props) {
   return (
     <div className="App">
-      <Calculator state={props.state}/>
+      <Calculator state={props.state} dispatch = {props.dispatch}/>
     </div>
   );
 }
