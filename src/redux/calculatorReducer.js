@@ -1,4 +1,5 @@
 const UPDATE_NUMBER = 'UPDATE-NUMBER';
+const UPDATE_NUMBER_TEXTAREA = 'UPDATE-NUMBER-TEXT-AREA';
 
 let initialState = {
     NumberButtons: [
@@ -13,12 +14,22 @@ let initialState = {
         { name: '8' },
         { name: '9' }
     ],
-    expression: '0'
+    expression: ''
 }
 
 
 const calculatorReducer = (state = initialState, action) => {
     switch (action.type) {
+        case UPDATE_NUMBER_TEXTAREA:
+            let newText;
+            if (action.text.charAt(0) === '=') {
+                newText = action.text.slice(1);
+            } else { newText = action.text }
+            if (isNaN(newText)) { return state; } else {
+                state.expression = newText;
+                return state;
+            }
+
         case UPDATE_NUMBER:
             state.expression += action.text;
             return state;
@@ -29,5 +40,8 @@ const calculatorReducer = (state = initialState, action) => {
 
 export const updateExpressionCreater = (text) => (
     { type: UPDATE_NUMBER, text: text });
+
+export const updateExpressionFromTextaresCreater = (text) => (
+    { type: UPDATE_NUMBER_TEXTAREA, text: text });
 
 export default calculatorReducer;
