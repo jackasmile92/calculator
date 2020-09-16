@@ -11,6 +11,7 @@ const CalculatorButtons = (props) => {
             <NumberButtons buttonsData={props.state.calculatorData} dispatch={props.dispatch} />
             <div  className ={s.number_buttons}>
                 <Button type={'clear'} name={'clr'} dispatch={props.dispatch} />
+                <Button type={'delLast'} name={'<x'} dispatch={props.dispatch} />
                 <Button type={'equal'} name={'='} dispatch={props.dispatch} />
             </div>
         </div>

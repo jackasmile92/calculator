@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Button.module.css';
-import { clearTextaresCreater, updateExpressionCreater } from '../../../redux/calculatorReducer';
+import { actionButtonPressed, clearTextaresCreater, deletePreviousSymbol, solveButtonPressed, updateExpressionCreater } from '../../../redux/calculatorReducer';
 
 const Button = (props) => {
     let onButtonClick = () => {
@@ -9,6 +9,15 @@ const Button = (props) => {
         }
         if (props.type === 'clear'){
             props.dispatch(clearTextaresCreater());
+        }
+        if (props.type === 'action'){
+            props.dispatch(actionButtonPressed(props.name));
+        }
+        if (props.type === 'equal'){
+            props.dispatch(solveButtonPressed());
+        }
+        if(props.type === 'delLast'){
+            props.dispatch(deletePreviousSymbol());
         }
     };
 
